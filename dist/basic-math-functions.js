@@ -19,6 +19,17 @@ var BasicMathFunctions = function () {
     value: function getAngleInDegrees(angle) {
       return angle * 180;
     }
+  }, {
+    key: "gcd",
+    value: function gcd(n, m) {
+      var r = 0;
+      while (n !== 0) {
+        r = m % n;
+        m = n;
+        n = r;
+      }
+      return m;
+    }
   }]);
 
   return BasicMathFunctions;

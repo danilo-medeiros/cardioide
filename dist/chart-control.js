@@ -23,18 +23,17 @@ var ChartControl = function () {
 
     this.basicMathFunctions = new BasicMathFunctions();
 
-    this.infoPos;
     if (this.type === "hypo") {
       this.chart.resetScale(300 / R);
-      this.infoPos = this.R * 0.9;
     } else {
       this.chart.resetScale(180 / (this.R + this.r));
-      this.infoPos = this.R * 0.9 + this.r + 2;
     }
 
+    this.infoPos = [(this.chart.canvas1.width / 2 - 200) / this.chart.scale, (this.chart.canvas1.height / 2 - 50) / this.chart.scale];
     this.chart.drawCircle(this.chart.ctx1, 0, 0, this.R, "#337ab7");
-    this.chart.drawText(this.chart.ctx1, "R = " + this.R, this.infoPos, this.infoPos);
-    this.chart.drawText(this.chart.ctx1, "r = " + this.r, this.infoPos, this.infoPos * 0.9);
+    this.chart.drawText(this.chart.ctx1, "R = " + this.R, this.infoPos[0], this.infoPos[1]);
+    this.chart.drawText(this.chart.ctx1, "r = " + this.r, this.infoPos[0], this.infoPos[1] * 0.9);
+    this.chart.drawText(this.chart.ctx1, "T = " + (this.type === "hypo" ? this.hypocycloid.getPeriod() : this.epicycloid.getPeriod()), this.infoPos[0], this.infoPos[1] * 0.8);
 
     this.drawCurve();
   }
@@ -102,7 +101,7 @@ var ChartControl = function () {
 
         this.chart.drawLine(this.chart.ctx2, originX, originY, futureX, futureY, "#d9534f");
         this.drawMovingCircle(this.counter, originX, originY);
-        this.chart.drawText(this.chart.ctx3, "t = " + this.counter + "°", this.infoPos, this.infoPos * 0.8);
+        this.chart.drawText(this.chart.ctx3, "t = " + this.counter + "°", this.infoPos[0], this.infoPos[1] * 0.7);
         setTimeout(function () {
           _this.drawCurve();
         }, 7);
