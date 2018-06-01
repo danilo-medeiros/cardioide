@@ -26,10 +26,10 @@ var ChartControl = function () {
     this.infoPos;
     if (this.type === "hypo") {
       this.chart.resetScale(300 / R);
-      this.infoPos = this.R;
+      this.infoPos = this.R * 0.9;
     } else {
       this.chart.resetScale(180 / (this.R + this.r));
-      this.infoPos = this.R + this.r + 2;
+      this.infoPos = this.R * 0.9 + this.r + 2;
     }
 
     this.chart.drawCircle(this.chart.ctx1, 0, 0, this.R, "#337ab7");
@@ -40,19 +40,6 @@ var ChartControl = function () {
   }
 
   _createClass(ChartControl, [{
-    key: "redraw",
-    value: function redraw() {
-      var _this = this;
-
-      setTimeout(function () {
-        // Se estiver no início (ângulo mínimo), pode reescrever a função
-        if (_this.counter === _this.minAngle && !_this.stop) {
-          _this.chart.clean(_this.chart.ctx2);
-          _this.drawCurve();
-        }
-      }, 1000);
-    }
-  }, {
     key: "drawMovingCircle",
     value: function drawMovingCircle(t, functionX, functionY) {
       // Desenha o círculo em uma posição especificada
@@ -70,12 +57,12 @@ var ChartControl = function () {
   }, {
     key: "drawCurve",
     value: function drawCurve() {
-      var _this2 = this;
+      var _this = this;
 
       // A verificação do stop também deve ocorrer aqui, pois a função 
       // drawCurve é chamada em mais de um lugar (redraw() e drawCurve())
       if (this.stop) return;
-
+      if (!this.stop && this.counter === this.minAngle) this.chart.clean(this.chart.ctx2);
       if (this.counter < this.maxAngle) {
         this.counter++;
         var originX = void 0,
@@ -117,11 +104,13 @@ var ChartControl = function () {
         this.drawMovingCircle(this.counter, originX, originY);
         this.chart.drawText(this.chart.ctx3, "t = " + this.counter + "°", this.infoPos, this.infoPos * 0.8);
         setTimeout(function () {
-          _this2.drawCurve();
+          _this.drawCurve();
         }, 7);
       } else {
         this.counter = this.minAngle;
-        this.redraw();
+        setTimeout(function () {
+          _this.drawCurve();
+        }, 500);
       }
     }
   }]);

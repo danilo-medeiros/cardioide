@@ -17,10 +17,10 @@ class ChartControl {
     this.infoPos;
     if (this.type === "hypo") {
       this.chart.resetScale(300 / R);
-      this.infoPos = this.R;
+      this.infoPos = this.R*0.9;
     } else {
       this.chart.resetScale(180 / (this.R + this.r));
-      this.infoPos = this.R + this.r + 2;
+      this.infoPos = this.R*0.9 + this.r + 2;
     }
 
     this.chart.drawCircle(this.chart.ctx1, 0, 0, this.R, "#337ab7");
@@ -29,17 +29,6 @@ class ChartControl {
     
     this.drawCurve();
   }
-
-  redraw() {
-    setTimeout(() => {
-      // Se estiver no início (ângulo mínimo), pode reescrever a função
-      if (this.counter === this.minAngle && !this.stop) {
-        this.chart.clean(this.chart.ctx2);
-        this.drawCurve();
-      }
-    }, 1000);
-  }
-
 
   drawMovingCircle(t, functionX, functionY) {
     // Desenha o círculo em uma posição especificada
@@ -59,7 +48,7 @@ class ChartControl {
     // A verificação do stop também deve ocorrer aqui, pois a função 
     // drawCurve é chamada em mais de um lugar (redraw() e drawCurve())
     if (this.stop) return;
-
+    if (!this.stop && this.counter === this.minAngle) this.chart.clean(this.chart.ctx2);
     if (this.counter < this.maxAngle) {
       this.counter++;
       let originX, originY, futureX, futureY;
@@ -80,7 +69,10 @@ class ChartControl {
       }, 7);
     } else {
       this.counter = this.minAngle;
-      this.redraw();
+      setTimeout(() => {
+        this.drawCurve();
+      }, 500)
+      
     }
   }
 
