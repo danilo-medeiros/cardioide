@@ -76,12 +76,27 @@ var Chart = function () {
   }, {
     key: "drawChart",
     value: function drawChart() {
-      var angle = 0;
-      while (angle < 360) {
-        var angleInRadians = this.basicMathFunctions.getAngleInRadians(angle);
-        this.drawLine(this.ctx1, 0, 0, Math.cos(angleInRadians) * this.width, Math.sin(angleInRadians) * this.width, "#CCC");
-        angle += 90;
+
+      this.ctx1.lineWidth = 2 / this.scale;
+
+      for (var i = 0; i < this.width; i++) {
+
+        var color = i === 0 ? "#000" : "#CCC";
+        // Linhas verticais
+        this.drawLine(this.ctx1, i * -1, this.width * -1, i * -1, this.width, color);
+        this.drawLine(this.ctx1, i, this.width * -1, i, this.width, color);
+
+        this.drawLine(this.ctx1, i, -0.1, i, 0.1, "#000");
+        this.drawLine(this.ctx1, i * -1, -0.1, i * -1, 0.1, "#000");
+
+        // Linhas horizontais
+        this.drawLine(this.ctx1, this.width * -1, i * -1, this.width, i * -1, color);
+        this.drawLine(this.ctx1, this.width * -1, i, this.width, i, color);
+
+        this.drawLine(this.ctx1, -0.1, i, 0.1, i, "#000");
+        this.drawLine(this.ctx1, -0.1, i * -1, 0.1, i * -1, "#000");
       }
+      this.ctx1.lineWidth = 5 / this.scale;
     }
   }, {
     key: "drawLine",

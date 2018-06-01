@@ -24,7 +24,7 @@ var ChartControl = function () {
     if (this.type === "hypo") {
       this.chart.resetScale(300 / R);
     } else {
-      this.chart.resetScale(90 / R);
+      this.chart.resetScale(180 / (this.R + this.r));
     }
 
     this.chart.drawCircle(this.chart.ctx1, 0, 0, this.R, "#337ab7");
