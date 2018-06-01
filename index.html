@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/style.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link rel="stylesheet" href="assets/css/multirange.css">
+  <title>Cardióide</title>
+</head>
+
+<body>
+  <div class='container' style='margin: 20px auto;'>
+    <div class='row'>
+      <div class='col-md-6'>
+        <h5>
+          <b>Hipociclóides</b>
+        </h5>
+        <p>Uma hipociclóide é uma curva descrita por um ponto P localizada na borda de um disco de raio r, tal que o disco realiza
+          unicamente rolamento na parte interna de uma superfície circular de raio R (com velocidade angular constante).
+          <br/> Considerando um sistema e coordenadas cartesianas com origem de coordenadas no centro da superfície circular de
+          raio R, a equação paramétrica deste ponto é a seguinte:
+        </p>
+        <p class='text-center'>
+          x = (R − r) cos(t) + r cos( (k − 1)t)
+          <br/>y = (R − r) sin(t) − r sin((k − 1)t)
+        </p>
+
+      </div>
+      <div class="col-md-6">
+        <h5>
+          <b>Epiciclóides</b>
+        </h5>
+        <p>Uma Epiciclóide é uma curva descrita por um ponto P localizada na borda de um disco de raio r, tal que o disco realiza
+          unicamente rolamento na parte externa de uma superfície circular de raio R (com velocidade angular constante).
+          <br/> Considerando um sistema e coordenadas cartesianas com origem de coordenadas no centro da superfície circular de
+          raio R, a equação paramétrica deste ponto é a seguinte:
+        </p>
+        <p class='text-center'>
+          x = (R − r) cos(t) + r cos( (k − 1)t)
+          <br/>y = (R − r) sin(t) − r sin((k − 1)t)
+        </p>
+
+        <!-- 
+        <div class='panel panel-primary'>
+          <div class='panel-heading'>
+            Parâmetros
+          </div>
+          <form id="mainForm" class="form-inline">
+            <div class='panel-body'>
+              <div class='row'>
+                <div class='col-md-12'>
+                  <div class='alert alert-info text-center'>
+                    (r, Θ) ∈ R³ | 0 ≤ r ≤ R, 0 ≤ Θ ≤ 2π
+                  </div>
+                </div>
+                <div class='col-md-12 math-function'>
+                  <label for="">Sua função:</label>
+                  <div style='font-size: 20px'>
+                    <span style='font-style: italic;'>r = </span>
+                    <input placeholder="a" value="1" type="number" class='form-control small' id="aValue">
+                    <span>× (1 </span>
+                    <select class='form-control small' id="nValue">
+                      <option value="1">+</option>
+                      <option value="-1">-</option>
+                    </select>
+                    <select class='form-control' id='funcValue'>
+                      <option value="sin">sen(Θ)</option>
+                      <option value="cos">cos(Θ)</option>
+                    </select>
+                    <span>)</span>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+            <div class='panel-footer text-right'>
+              <div class='form-group'>
+                <select id="isRegularChart" class='form-control'>
+                  <option value="1">Normal</option>
+                  <option value="0">Devagar</option>
+                </select>
+                <select id="withCircunference" class='form-control' style="display: none">
+                  <option value="0">Sem circunferência</option>
+                  <option value="1">Com circunferência</option>
+                </select>
+                <div style='display: inline;'>
+                  <input type="submit" class='btn btn-primary' value="Gerar gráfico">
+                  <input type="button" class='btn btn-danger hidden' id="clearButton" value="Limpar">
+                </div>
+              </div>
+            </div>
+          </form>
+        </div> -->
+      </div>
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">Gerar gráfico da curva</div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <form class="form" id="mainForm">
+                  <div class="form-group">
+                    <label for="">Tipo da curva: </label>
+                    <select name="" id="type" class="form-control">
+                      <option value="hypo">Hipociclóide</option>
+                      <option value="epi">Epiciclóide</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="">R: (Raio da circunferência azul)</label>
+                    <input type="number" id="radius1" value="3" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="">r: (Raio da circunferência preta)</label>
+                    <input type="number" id="radius2" value="1" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="">Gerar gráfico até:</label>
+                    <div class='input-group'>
+                      <input type="number" class="form-control" id="maxAngle" value="360" />
+                      <span class="input-group-addon">°</span>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Desenhar curva</button>
+                  </div>
+                </form>
+                <div class='alert alert-info special-case hidden' id="cardioid-message">
+                  Caso especial: Cardióide
+                </div>
+                <div class='alert alert-info special-case hidden' id="deltoid-message">
+                  Caso especial: Deltóide
+                </div>
+                <div class='alert alert-info special-case hidden' id="astroid-message">
+                  Caso especial: Astróide
+                </div>
+              </div>
+              <div class='col-md-6'>
+                <div id='simpleCanvasContainer' class='relative canvas-container'>
+                  <canvas id='canvas1' style='z-index: 1'></canvas>
+                  <canvas id='canvas2' style='z-index: 2'></canvas>
+                  <canvas id='canvas3' style='z-index: 3'></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <script type="text/javascript" src="dist/chart.js"></script>
+  <script type="text/javascript" src="dist/chart-control.js"></script>
+  <script type="text/javascript" src="dist/form-control.js"></script>
+  <script type="text/javascript" src="dist/basic-math-functions.js"></script>
+  <script type="text/javascript" src="dist/cycloid.js"></script>
+  <script type="text/javascript" src="dist/epicycloid.js"></script>
+  <script type="text/javascript" src="dist/hypocycloid.js"></script>
+  <script type="text/javascript" src="dist/index.js"></script>
+</body>
+
+</html>
