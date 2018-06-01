@@ -7,31 +7,52 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 var ChartControl = function () {
-  function ChartControl(R, r, maxAngle, type, chart) {
+  function ChartControl(R, r, minAngle, maxAngle, type, chart) {
     _classCallCheck(this, ChartControl);
 
     this.R = parseInt(R);
     this.r = parseInt(r);
+    this.minAngle = parseInt(minAngle);
     this.maxAngle = parseInt(maxAngle);
     this.type = type;
     this.chart = chart;
     this.epicycloid = new Epicycloid(this.R, this.r);
     this.hypocycloid = new Hypocycloid(this.R, this.r);
-    this.counter = this.maxAngle;
+    this.counter = this.minAngle;
+    this.stop = false;
 
     this.basicMathFunctions = new BasicMathFunctions();
 
+    this.infoPos;
     if (this.type === "hypo") {
       this.chart.resetScale(300 / R);
+      this.infoPos = this.R;
     } else {
       this.chart.resetScale(180 / (this.R + this.r));
+      this.infoPos = this.R + this.r + 2;
     }
 
     this.chart.drawCircle(this.chart.ctx1, 0, 0, this.R, "#337ab7");
+    this.chart.drawText(this.chart.ctx1, "R = " + this.R, this.infoPos, this.infoPos);
+    this.chart.drawText(this.chart.ctx1, "r = " + this.r, this.infoPos, this.infoPos * 0.9);
+
     this.drawCurve();
   }
 
   _createClass(ChartControl, [{
+    key: "redraw",
+    value: function redraw() {
+      var _this = this;
+
+      setTimeout(function () {
+        // Se estiver no início (ângulo mínimo), pode reescrever a função
+        if (_this.counter === _this.minAngle && !_this.stop) {
+          _this.chart.clean(_this.chart.ctx2);
+          _this.drawCurve();
+        }
+      }, 1000);
+    }
+  }, {
     key: "drawMovingCircle",
     value: function drawMovingCircle(t, functionX, functionY) {
       // Desenha o círculo em uma posição especificada
@@ -42,17 +63,21 @@ var ChartControl = function () {
       var posY = Math.sin(this.basicMathFunctions.getAngleInRadians(t)) * diff;
       this.chart.clean(this.chart.ctx3);
       this.chart.drawCircle(this.chart.ctx3, posX, posY, this.r, "#000");
-      this.chart.drawCircle(this.chart.ctx3, posX, posY, this.r / 25, "#000");
-      this.chart.drawCircle(this.chart.ctx3, functionX, functionY, this.r / 25, "#d9534f");
+      this.chart.drawCircle(this.chart.ctx3, posX, posY, this.r / 15, "#000");
+      this.chart.drawCircle(this.chart.ctx3, functionX, functionY, this.r / 15, "#d9534f");
       this.chart.drawLine(this.chart.ctx3, posX, posY, functionX, functionY, "#000");
     }
   }, {
     key: "drawCurve",
     value: function drawCurve() {
-      var _this = this;
+      var _this2 = this;
 
-      if (this.counter > 0) {
-        this.counter--;
+      // A verificação do stop também deve ocorrer aqui, pois a função 
+      // drawCurve é chamada em mais de um lugar (redraw() e drawCurve())
+      if (this.stop) return;
+
+      if (this.counter < this.maxAngle) {
+        this.counter++;
         var originX = void 0,
             originY = void 0,
             futureX = void 0,
@@ -89,10 +114,14 @@ var ChartControl = function () {
         }
 
         this.chart.drawLine(this.chart.ctx2, originX, originY, futureX, futureY, "#d9534f");
-        this.drawMovingCircle(this.counter, futureX, futureY);
+        this.drawMovingCircle(this.counter, originX, originY);
+        this.chart.drawText(this.chart.ctx3, "t = " + this.counter + "°", this.infoPos, this.infoPos * 0.8);
         setTimeout(function () {
-          _this.drawCurve();
+          _this2.drawCurve();
         }, 7);
+      } else {
+        this.counter = this.minAngle;
+        this.redraw();
       }
     }
   }]);

@@ -23,12 +23,6 @@ var Epicycloid = function (_Cycloid) {
     }
 
     _createClass(Epicycloid, [{
-        key: "getType",
-        value: function getType() {
-            var k = this.R / this.r;
-            if (k === 1) return "Cardi\xF3ide (k = 1)";else return "k = " + k;
-        }
-    }, {
         key: "get",
         value: function get(t) {
             return [(this.R + this.r) * Math.cos(this.basicMathFunctions.getAngleInRadians(t)) - this.r * Math.cos(this.basicMathFunctions.getAngleInRadians(this.R / this.r + 1) * t), (this.R + this.r) * Math.sin(this.basicMathFunctions.getAngleInRadians(t)) - this.r * Math.sin(this.basicMathFunctions.getAngleInRadians(this.R / this.r + 1) * t)];

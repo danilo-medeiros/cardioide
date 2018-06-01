@@ -9,16 +9,6 @@ class Hypocycloid extends Cycloid {
         super(R, r);
     }
 
-    getType() {
-        let k = this.R / this.r;
-        if (k === 3)
-            return "Deltóide (k = 3)";
-        else if (k === 4)
-            return "Astróide (k = 4)";
-        else
-            return "k = " + k;
-    }
-
     get(t) {
         return [
             (this.R - this.r) * 

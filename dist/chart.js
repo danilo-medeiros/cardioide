@@ -28,22 +28,24 @@ var Chart = function () {
     key: "configure",
     value: function configure() {
 
-      this.canvas1.width = this.canvas2.width = this.canvas3.width = window.innerWidth * 0.6;
-      this.canvas1.height = this.canvas2.height = this.canvas3.height = window.innerWidth * 0.6;
+      this.canvas1.width = this.canvas2.width = this.canvas3.width = 816;
+      this.canvas1.height = this.canvas2.height = this.canvas3.height = 816;
 
       this.ctx1 = this.canvas1.getContext("2d");
       this.ctx2 = this.canvas2.getContext("2d");
       this.ctx3 = this.canvas3.getContext("2d");
 
       this.ctx1.lineWidth = this.ctx2.lineWidth = this.ctx3.lineWidth = 5 / this.scale;
+      this.ctx1.font = this.ctx2.font = this.ctx3.font = "italic 1px Helvetica";
+      //this.ctx1.textAlign = this.ctx2.textAlign = this.ctx3.textAlign = "center";
 
       this.ctx1.translate(this.canvas1.width / 2, this.canvas1.height / 2);
       this.ctx2.translate(this.canvas2.width / 2, this.canvas2.height / 2);
       this.ctx3.translate(this.canvas3.width / 2, this.canvas3.height / 2);
 
-      this.ctx1.scale(this.scale, this.scale);
-      this.ctx2.scale(this.scale, this.scale);
-      this.ctx3.scale(this.scale, this.scale);
+      this.ctx1.scale(this.scale, -1 * this.scale);
+      this.ctx2.scale(this.scale, -1 * this.scale);
+      this.ctx3.scale(this.scale, -1 * this.scale);
 
       // Tamanho do canvas em unidades já escaladas
       this.width = this.canvas1.width / this.scale;
@@ -114,6 +116,14 @@ var Chart = function () {
       ctx.arc(x, y, radius, 0, 2 * Math.PI);
       ctx.strokeStyle = color;
       ctx.stroke();
+    }
+  }, {
+    key: "drawText",
+    value: function drawText(ctx, text, x, y) {
+      var newScale = 30;
+      ctx.scale(newScale / this.scale, -1 * newScale / this.scale);
+      ctx.fillText(text, x * this.scale / newScale, y * this.scale / (-1 * newScale));
+      ctx.scale(this.scale / newScale, this.scale / (-1 * newScale));
     }
   }]);
 

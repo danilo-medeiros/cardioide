@@ -8,14 +8,6 @@ class Epicycloid extends Cycloid {
         super(R, r);
     }
 
-    getType() {
-        let k = this.R / this.r;
-        if (k === 1)
-            return `Cardióide (k = 1)`;
-        else
-            return `k = ${k}`;
-    }
-
     get(t) {
         return [
             (this.R + this.r) *

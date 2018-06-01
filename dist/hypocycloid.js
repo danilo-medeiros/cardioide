@@ -23,12 +23,6 @@ var Hypocycloid = function (_Cycloid) {
     }
 
     _createClass(Hypocycloid, [{
-        key: "getType",
-        value: function getType() {
-            var k = this.R / this.r;
-            if (k === 3) return "Deltóide (k = 3)";else if (k === 4) return "Astróide (k = 4)";else return "k = " + k;
-        }
-    }, {
         key: "get",
         value: function get(t) {
             return [(this.R - this.r) * Math.cos(this.basicMathFunctions.getAngleInRadians(t)) + this.r * Math.cos(this.basicMathFunctions.getAngleInRadians(this.R / this.r - 1) * t), (this.R - this.r) * Math.sin(this.basicMathFunctions.getAngleInRadians(t)) - this.r * Math.sin(this.basicMathFunctions.getAngleInRadians(this.R / this.r - 1) * t)];

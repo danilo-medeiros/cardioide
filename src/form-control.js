@@ -1,29 +1,42 @@
 class FormControl {
 
-  constructor(radius1Input, radius2Input, maxAngleInput, typeInput, chart) {
+  constructor(radius1Input, radius2Input, minAngleInput, maxAngleInput, typeInput, chart) {
 
     this.radius1Input = radius1Input;
     this.radius2Input = radius2Input;
+    this.minAngleInput = minAngleInput;
     this.maxAngleInput = maxAngleInput;
     this.typeInput = typeInput;
-    this.chartControl = new ChartControl(this.radius1Input.value, this.radius2Input.value, this.maxAngleInput.value, this.typeInput.value, chart);
-
+    this.basicMathFunctions = new BasicMathFunctions();
+    this.chartControl = new ChartControl(this.radius1Input.value, this.radius2Input.value, this.getAngle(this.minAngleInput.value), this.getAngle(this.maxAngleInput.value), this.typeInput.value, chart);
+    
     this.update();
-    //this.checkType();
+
+    this.radius1Input.addEventListener("input", event => this.validation());
+    this.radius2Input.addEventListener("input", event => this.validation())
+    this.typeInput.addEventListener("input", event => this.validation());
   }
 
-  // De acordo com o tipo selecionado, coloca valores nos raios
-  checkType() {
-    if (this.typeInput.value === "hypo") {
-      this.radius1Input.value = 3;
-      this.radius2Input.value = 1;
-    } else {
-      this.radius1Input.value = 1;
-      this.radius2Input.value = 1;
+  getAngle(angle) {
+    let angleInParts = angle.split("/");
+    if (angleInParts.length > 1) {
+      return this.basicMathFunctions.getAngleInDegrees(parseInt(angleInParts[0]) / parseInt(angleInParts[1]));
     }
-    this.update();
+    return this.basicMathFunctions.getAngleInDegrees(parseInt(angleInParts[0]));
   }
 
+  validation() {
+    this.radius2Input.setCustomValidity("");
+    if (parseInt(this.radius1Input.value) <= parseInt(radius2Input.value) && this.typeInput.value === "hypo") {
+      this.radius2Input.setCustomValidity("Ângulo inválido. Lembre que R > r");
+      return false;
+    }
+    if (parseInt(this.radius1Input.value) < radius2Input.value && parseInt(this.typeInput.value) === "epi") {
+      this.radius2Input.setCustomValidity("Ângulo inválido. Lembre que R >= r");
+      return false;
+    }
+    return true;
+  }
 
   // Verifica se existe caso especial (Astroide, Cardioide e Deltoide)
   checkSpecialCase() {
@@ -45,7 +58,21 @@ class FormControl {
   // Atualiza tudo com os valores informados
   update() {
     this.checkSpecialCase();
-    this.chartControl = new ChartControl(this.radius1Input.value, this.radius2Input.value, this.maxAngleInput.value, this.typeInput.value, chart);
+    this.chartControl.stop = true;
+    this.chartControl = new ChartControl(this.radius1Input.value, this.radius2Input.value, this.getAngle(this.minAngleInput.value), this.getAngle(this.maxAngleInput.value), this.typeInput.value, chart);
+  }
+
+  stop() {
+    this.chartControl.stop = true;
+  }
+
+  isStopped() {
+    return this.chartControl.stop;
+  }
+
+  continue() {
+    this.chartControl.stop = false;
+    this.chartControl.drawCurve();
   }
 
 }
