@@ -49,7 +49,7 @@
           <div class="panel-body">
             <div class="row">
               <div class="col-md-6 col-sm-4 col-lg-6 col-xs-12">
-                <form class="form" id="mainForm">
+                <form class="form" id="mainForm" autocomplete="off">
                   <div class="form-group">
                     <label for="type">Tipo da curva: </label>
                     <select name="type" id="type" class="form-control">
@@ -59,11 +59,11 @@
                   </div>
                   <div class="form-group">
                     <label for="radius1">\(R\) (Circunferência azul): </label>
-                    <input type="number" id="radius1" value="3" class="form-control">
+                    <input type="number" step="0.01" id="radius1" value="3" class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="radius2">\(r\) (Circunferência preta): </label>
-                    <input type="number" id="radius2" value="1" class="form-control">
+                    <input type="number" step="0.01" id="radius2" value="1" class="form-control">
                   </div>
                   <div class="form-group">
                     <label for="">\(t\) (Ângulo em π radianos):</label>

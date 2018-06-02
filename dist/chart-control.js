@@ -10,10 +10,10 @@ var ChartControl = function () {
   function ChartControl(R, r, minAngle, maxAngle, type, chart) {
     _classCallCheck(this, ChartControl);
 
-    this.R = parseInt(R);
-    this.r = parseInt(r);
-    this.minAngle = parseInt(minAngle);
-    this.maxAngle = parseInt(maxAngle);
+    this.R = parseFloat(R);
+    this.r = parseFloat(r);
+    this.minAngle = parseFloat(minAngle);
+    this.maxAngle = parseFloat(maxAngle);
     this.type = type;
     this.chart = chart;
     this.epicycloid = new Epicycloid(this.R, this.r);
@@ -29,7 +29,7 @@ var ChartControl = function () {
       this.chart.resetScale(180 / (this.R + this.r));
     }
 
-    this.infoPos = [(this.chart.canvas1.width / 2 - 200) / this.chart.scale, (this.chart.canvas1.height / 2 - 50) / this.chart.scale];
+    this.infoPos = [-1 * (this.chart.canvas1.width / 2 - 20) / this.chart.scale, (this.chart.canvas1.height / 2 - 40) / this.chart.scale];
     this.chart.drawCircle(this.chart.ctx1, 0, 0, this.R, "#337ab7");
     this.chart.drawText(this.chart.ctx1, "R = " + this.R, this.infoPos[0], this.infoPos[1]);
     this.chart.drawText(this.chart.ctx1, "r = " + this.r, this.infoPos[0], this.infoPos[1] * 0.9);

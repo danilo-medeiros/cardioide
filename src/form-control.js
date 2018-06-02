@@ -15,24 +15,36 @@ class FormControl {
     this.radius1Input.addEventListener("input", event => this.validation());
     this.radius2Input.addEventListener("input", event => this.validation())
     this.typeInput.addEventListener("input", event => this.validation());
+    this.maxAngleInput.addEventListener("keyup", event => this.validation());
+    this.minAngleInput.addEventListener("keyup", event => this.validation());
   }
 
   getAngle(angle) {
-    let angleInParts = angle.split("/");
+    let angleInParts = angle.replace(",", ".").split("/");
     if (angleInParts.length > 1) {
-      return this.basicMathFunctions.getAngleInDegrees(parseInt(angleInParts[0]) / parseInt(angleInParts[1]));
+      return this.basicMathFunctions.getAngleInDegrees(parseFloat(angleInParts[0]) / parseFloat(angleInParts[1]));
     }
-    return this.basicMathFunctions.getAngleInDegrees(parseInt(angleInParts[0]));
+    return this.basicMathFunctions.getAngleInDegrees(parseFloat(angleInParts[0]));
   }
 
   validation() {
     this.radius2Input.setCustomValidity("");
-    if (parseInt(this.radius1Input.value) <= parseInt(radius2Input.value) && this.typeInput.value === "hypo") {
-      this.radius2Input.setCustomValidity("Ângulo inválido. Lembre que R > r");
+    this.minAngleInput.setCustomValidity("");
+    this.maxAngleInput.setCustomValidity("");
+    if (parseFloat(this.radius1Input.value) <= parseFloat(radius2Input.value) && this.typeInput.value === "hypo") {
+      this.radius2Input.setCustomValidity("Raio inválido. Lembre que R > r");
       return false;
     }
-    if (parseInt(this.radius1Input.value) < radius2Input.value && parseInt(this.typeInput.value) === "epi") {
-      this.radius2Input.setCustomValidity("Ângulo inválido. Lembre que R >= r");
+    if (parseFloat(this.radius1Input.value) < radius2Input.value && parseFloat(this.typeInput.value) === "epi") {
+      this.radius2Input.setCustomValidity("Raio inválido. Lembre que R >= r");
+      return false;
+    }
+    if (isNaN(this.getAngle(this.minAngleInput.value))) {
+      this.minAngleInput.setCustomValidity("Valor inválido. Insira somente números");
+      return false;
+    }
+    if (isNaN(this.getAngle(this.maxAngleInput.value))) {
+      this.maxAngleInput.setCustomValidity("Valor inválido. Insira somente números");
       return false;
     }
     return true;
