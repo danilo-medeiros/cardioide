@@ -1,0 +1,130 @@
+@charset "UTF-8";
+
+@font-face{
+	font-family: chawp;
+	src: url(../fontes/chawp.otf);
+}
+
+html {
+  	height: 100%;
+  	box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  	box-sizing: inherit;
+}
+
+body {
+  	position: relative;
+  	margin: 0;
+  	padding-bottom: 150px;
+  	min-height: 100%;
+  	font-family: Arial, Sans-serif;
+	font-size: 15px;
+}
+
+input{
+	text-align: center;
+}
+
+figcaption {font-size: 8pt}
+
+nav.navbar{
+	padding-left: 2%;
+	padding-right: 2%;
+}
+
+.navbar-logo{
+	font-family: champ;
+}
+
+p{
+	text-align: justify;
+}
+
+.formulario{
+	margin: 25px 50px 25px 50px;
+}
+
+p.recuo{
+	text-indent: 40px;
+}
+
+p.teorema{
+	border: 1px solid gray;
+	padding: 10px;
+	width: 80%;
+	margin-left: 50px;
+}
+
+p.caption{
+	text-align: right;
+	font-size: 10pt;
+	margin-bottom: 0px;
+	margin-left: 60px;
+}
+
+p#vetores{
+	text-align: center;
+	display: none;
+}
+
+div#vetores{
+	margin-top: 40px;
+	text-align: center;
+	padding-left: 10px;
+	padding-right: 0px;
+}
+
+.vetor{
+	font-size: 15pt;
+	text-align: center;
+	border: 1px solid gray;
+	display: none;
+}
+
+.calculo{
+	margin-left: 10%;
+	font-size: 12pt;
+}
+
+.marginInput{
+	margin-left: 40px;
+}
+
+.marginLeft{
+	margin-left: 80px;
+}
+
+#asteriscos{
+	margin-top: 80px;
+}
+
+#demo, #escalar1, #escalar2, #escalar3, #nota-modulo, span#prova2, p#vetorNulo, p#multiplos, p#naoMultiplos,div#resposta2, div#resposta3, #asteriscos{
+	display: none;
+}
+
+.fonte8 {font-size: 8pt}
+
+.inline-block {display: inline-block}
+
+.rodape {
+  	position: absolute;
+  	right: 0;
+  	bottom: 0;
+  	left: 0;
+   	width: 100%;
+	background-color: #0A383F;
+	color: white;
+}
+
+footer img{
+	margin: 20px; 
+	height: 40px;
+}
+
+input[type="number"] {
+   width:80px;
+}

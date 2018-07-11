@@ -4,114 +4,188 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="assets/css/template.css">
+  <link rel="stylesheet" href="assets/css/estilo.css">
   <link rel="stylesheet" href="assets/css/style.css">
   <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML" async></script>
+  <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"
+    async></script>
   <title>Cardióide</title>
 </head>
 
 <body>
-  <div class='container' style='margin: 20px auto;'>
+  <div class="container">
+    <h2>Ciclóides</h2>
+    <br>
     <div class='row'>
-      <div class='col-md-6'>
-        <h5>
+      <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <h5 class="text-center">
           <b>Hipociclóides</b>
         </h5>
-        <p>Uma hipociclóide é uma curva descrita por um ponto \(P\) localizada na borda de um disco de raio \(r\), tal que o disco realiza
-          unicamente rolamento na parte interna de uma superfície circular de raio \(R\) (com velocidade angular constante).
-          <br/> Considerando um sistema e coordenadas cartesianas com origem de coordenadas no centro da superfície circular de
-          raio \(R\), a equação paramétrica deste ponto é a seguinte:
+        <p class="recuo">Uma hipociclóide é uma curva descrita por um ponto \(P\) localizada na borda de um disco de raio \(r\), tal que o
+          disco realiza unicamente rolamento (com velocidade angular constante) na parte
+          <b>interna</b> de uma superfície circular de raio \(R\).
+        </p>
+        <p class="recuo"> Considerando um sistema e coordenadas cartesianas com origem de coordenadas no centro da superfície circular de raio
+          \(R\), a equação paramétrica deste ponto é a seguinte:
         </p>
         <p class='text-center'>
           \(x = (R − r) cos(t) + r cos( (k − 1)t)\)
-          <br/>\(y = (R − r) sin(t) − r sin((k − 1)t)\)
+          <br/>\(y = (R − r) sin(t) − r sin((k − 1)t)\),
+          <br>onde \(k = R/r\)
         </p>
 
       </div>
-      <div class="col-md-6">
-        <h5>
+      <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <h5 class="text-center">
           <b>Epiciclóides</b>
         </h5>
-        <p>Uma Epiciclóide é uma curva descrita por um ponto \(P\) localizada na borda de um disco de raio \(r\), tal que o disco realiza
-          unicamente rolamento na parte externa de uma superfície circular de raio \(R\) (com velocidade angular constante).
-          <br/> Considerando um sistema e coordenadas cartesianas com origem de coordenadas no centro da superfície circular de
-          raio \(R\), a equação paramétrica deste ponto é a seguinte:
+        <p class="recuo">Uma epiciclóide é uma curva descrita por um ponto \(P\) localizada na borda de um disco de raio \(r\), tal que o
+          disco realiza unicamente rolamento (com velocidade angular constante) na parte
+          <b>externa</b> de uma superfície circular de raio \(R\).
+        </p>
+        <p class="recuo">Considerando um sistema e coordenadas cartesianas com origem de coordenadas no centro da superfície circular de raio
+          \(R\), a equação paramétrica deste ponto é a seguinte:
         </p>
         <p class='text-center'>
           \(x = (R + r) cos(t) − r cos((k + 1)t) \)
-          <br>\(y = (R + r) sin(t) − r sin((k + 1) t)\)
+          <br>\(y = (R + r) sin(t) − r sin((k + 1) t)\),
+          <br>onde \(k = R/r\)
         </p>
-
       </div>
-      <div class="col-md-12">
-        <div class="panel panel-default">
-          <div class="panel-heading">Gerar gráfico da curva</div>
-          <div class="panel-body">
-            <div class="row">
-              <div class="col-md-6 col-sm-4 col-lg-6 col-xs-12">
-                <form class="form" id="mainForm" autocomplete="off">
-                  <div class="form-group">
-                    <label for="type">Tipo da curva: </label>
-                    <select name="type" id="type" class="form-control">
-                      <option value="hypo">Hipociclóide</option>
-                      <option value="epi">Epiciclóide</option>
-                    </select>
-                  </div>
-                  <div class="form-group">
-                    <label for="radius1">\(R\) (Circunferência azul): </label>
-                    <input type="number" step="0.01" id="radius1" value="3" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="radius2">\(r\) (Circunferência preta): </label>
-                    <input type="number" step="0.01" id="radius2" value="1" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <label for="">\(t\) (Ângulo em π radianos):</label>
-                    <div class="form-inline">
-                      <label for="minAngle">De</label>
-                      <input type="text" class="form-control" id="minAngle" value="0">
-                      <label for="maxAngle">Até</label>
-                      <input type="text" class="form-control" id="maxAngle" value="2">
-                    </div>
-                  </div>
-                  <div class="form-group">
-                    <button class="btn btn-primary" type="submit">Desenhar curva</button>
-                    <button class="btn btn-danger" id="stop" type="button">Parar animação</button>
-                    <button class="btn btn-success hidden" id="continue" type="button">Continuar animação</button>
-                  </div>
-                </form>
-                <div class='alert alert-info special-case hidden' id="cardioid-message">
-                  Caso especial: Cardióide
-                </div>
-                <div class='alert alert-info special-case hidden' id="deltoid-message">
-                  Caso especial: Deltóide
-                </div>
-                <div class='alert alert-info special-case hidden' id="astroid-message">
-                  Caso especial: Astróide
-                </div>
+      <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 text-center" style="margin-top: 30px">
+        <div class="row">
+          <div class="col-md-6 col-sm-5 col-lg-6 col-xs-12">
+            <form class="form" id="mainForm" autocomplete="off">
+              <div class="form-group">
+                <label for="type">Tipo da curva: </label>
+                <select name="type" id="type" class="form-control">
+                  <option value="hypo">Hipociclóide</option>
+                  <option value="epi">Epiciclóide</option>
+                  <option value="cyc">Ciclóide</option>
+                </select>
               </div>
-              <div class='col-md-6 col-sm-8 col-lg-6 col-xs-12'>
-                <div id='simpleCanvasContainer' class='relative canvas-container'>
-                  <canvas id='canvas1' style='z-index: 1'></canvas>
-                  <canvas id='canvas2' style='z-index: 2'></canvas>
-                  <canvas id='canvas3' style='z-index: 3'></canvas>
-                </div>
+              <div class="form-group">
+                <label for="radius1">\(R\) (Circunferência azul): </label>
+                <input type="number" step="0.01" id="radius1" value="3" class="form-control center">
               </div>
+              <div class="form-group">
+                <label for="radius2">\(r\) (Circunferência preta): </label>
+                <input type="number" step="0.01" id="radius2" value="1" class="form-control center">
+              </div>
+              <div class="form-group form-inline">
+                <label for="">\(t\) (Ângulo em π radianos):</label>
+                <div class="row">
+                  <div class="text-center col-md-6 col-xs-6 col-lg-6 col-sm-6">
+                    <label for="minAngle">De</label>
+                    <input type="number" step="0.01" class="form-control form-control-block" id="minAngle" value="0">
+                  </div>
+                  <div class="text-center col-md-6 col-xs-6 col-lg-6 col-sm-6">
+                    <label for="maxAngle">Até</label>
+                    <input type="number" step="0.01" class="form-control form-control-block" id="maxAngle" value="2">
+                  </div>
+                </div>
+
+              </div>
+              <div class="form-group">
+                <button class="btn btn-primary" type="submit">Desenhar curva</button>
+                <button class="btn btn-danger" id="stop" type="button">Parar animação</button>
+                <button class="btn btn-success hidden" id="continue" type="button">Continuar animação</button>
+              </div>
+            </form>
+            <div class='alert alert-info special-case hidden' id="cardioid-message">
+              Caso especial: Cardióide
+            </div>
+            <div class='alert alert-info special-case hidden' id="deltoid-message">
+              Caso especial: Deltóide
+            </div>
+            <div class='alert alert-info special-case hidden' id="astroid-message">
+              Caso especial: Astróide
+            </div>
+          </div>
+          <div class='col-md-6 col-sm-7 col-lg-6 col-xs-12'>
+            <div id='simpleCanvasContainer' class='relative canvas-container'>
+              <canvas id='canvas1' style='z-index: 1'></canvas>
+              <canvas id='canvas2' style='z-index: 2'></canvas>
+              <canvas id='canvas3' style='z-index: 3'></canvas>
             </div>
           </div>
         </div>
       </div>
-
+      <div class="col-md-12 col-sm-12 col-xs-12 col-lg-12" style="margin-top: 30px">
+        <h5 class="text-center">
+          <b>Ciclóides</b>
+        </h5>
+        <p class="recuo">Uma ciclóide é uma curva descrita por um ponto \(P\) localizado na borda de um disco de raio \(r\), tal que o disco
+          realiza um rolamento (com velocidade angular constante) sem deslizar, ao longo de uma
+          <b>reta</b>.
+        </p>
+        <p class="recuo">Um ciclóide iniciado na origem de um sistema de eixos, criado por uma circunferência de raio \(r\), consiste nos
+          pontos \((x,y)\) definidos por:
+        </p>
+        <p class='text-center'>
+          \(x = r(t - sen (t))\)
+          <br>\(y = r(1 - cos(t) \)
+        </p>
+      </div>
+      <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
+        <div class="row">
+          <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+            <form class="form" id="cycloidForm" autocomplete="off">
+              <div class="row">
+                <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
+                  <div class="form-group text-center">
+                    <label for="radius3">\(r\)</label>
+                    <br>
+                    <label for="">(Raio da circunferência):</label>
+                    <input type="number" step="0.01" id="radius3" value="1" class="form-control form-control-block">
+                  </div>
+                </div>
+                <div class="col-md-8 col-xs-12 col-lg-8 col-sm-12">
+                  <div class="form-group text-center">
+                    <label for="">\(t\) (Ângulo em π radianos):</label>
+                    <div class="row">
+                      <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 form-inline">
+                        <label for="">De:</label>
+                        <input type="number" class="form-control form-control-block" id="minAngleCycloid" value="0">
+                      </div>
+                      <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 form-inline">
+                        <label for="">até</label>
+                        <input type="number" class="form-control form-control-block" id="maxAngleCycloid" value="2">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="form-group text-center">
+                <button class="btn btn-primary" type="submit">Desenhar curva</button>
+                <button class="btn btn-danger" id="stopCycloid" type="button">Parar animação</button>
+                <button class="btn btn-success hidden" id="continueCycloid" type="button">Continuar animação</button>
+              </div>
+            </form>
+          </div>
+          <div class='col-md-12 col-sm-12 col-lg-12 col-xs-12'>
+            <div id='cycloidCanvasContainer' class='cycloid relative canvas-container'>
+              <canvas id='canvas4' style='z-index: 1'></canvas>
+              <canvas id='canvas5' style='z-index: 2'></canvas>
+              <canvas id='canvas6' style='z-index: 3'></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='col-md-12 col-xs-12 col-lg-12 col-sm-12' style="margin-top: 30px">
+        <p>Desenvolvedor:
+          <a target="_blank" href="https://github.com/medeirosDanilo">Danilo dos Santos Medeiros</a>
+        </p>
+      </div>
     </div>
   </div>
-  <script type="text/javascript" src="dist/chart.js"></script>
-  <script type="text/javascript" src="dist/chart-control.js"></script>
-  <script type="text/javascript" src="dist/form-control.js"></script>
-  <script type="text/javascript" src="dist/basic-math-functions.js"></script>
-  <script type="text/javascript" src="dist/cycloid.js"></script>
-  <script type="text/javascript" src="dist/epicycloid.js"></script>
-  <script type="text/javascript" src="dist/hypocycloid.js"></script>
-  <script type="text/javascript" src="dist/index.js"></script>
+  <br>
+  <br>
+
+  </div>
+  <script type="text/javascript" src="dist/cardioide.bundle.js"></script>
 </body>
 
 </html>

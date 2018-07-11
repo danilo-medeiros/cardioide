@@ -1,4 +1,7 @@
-class FormControl {
+import BasicMathFunctions from "./basic-math-functions";
+import ChartControl from "./chart-control";
+
+export default class FormControl {
 
   constructor(radius1Input, radius2Input, minAngleInput, maxAngleInput, typeInput, chart) {
 
@@ -8,6 +11,7 @@ class FormControl {
     this.maxAngleInput = maxAngleInput;
     this.typeInput = typeInput;
     this.basicMathFunctions = new BasicMathFunctions();
+    this.chart = chart;
     this.chartControl = new ChartControl(this.radius1Input.value, this.radius2Input.value, this.getAngle(this.minAngleInput.value), this.getAngle(this.maxAngleInput.value), this.typeInput.value, chart);
     
     this.update();
@@ -71,7 +75,7 @@ class FormControl {
   update() {
     this.checkSpecialCase();
     this.chartControl.stop = true;
-    this.chartControl = new ChartControl(this.radius1Input.value, this.radius2Input.value, this.getAngle(this.minAngleInput.value), this.getAngle(this.maxAngleInput.value), this.typeInput.value, chart);
+    this.chartControl = new ChartControl(this.radius1Input.value, this.radius2Input.value, this.getAngle(this.minAngleInput.value), this.getAngle(this.maxAngleInput.value), this.typeInput.value, this.chart);
   }
 
   stop() {

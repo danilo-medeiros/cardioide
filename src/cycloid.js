@@ -1,4 +1,6 @@
-class Cycloid {
+import BasicMathFunctions from "./basic-math-functions";
+
+export default class Cycloid {
     
     constructor(R, r) {
         this.basicMathFunctions = new BasicMathFunctions();

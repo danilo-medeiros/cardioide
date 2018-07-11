@@ -1,3 +1,6 @@
+import FormControl from "./form-control";
+import Chart from "./chart";
+
 let typeInput = document.getElementById("type");
 let radius1Input = document.getElementById("radius1");
 let radius2Input = document.getElementById("radius2");

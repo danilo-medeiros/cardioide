@@ -1,4 +1,6 @@
-class Hypocycloid extends Cycloid {
+import Cycloid from "./cycloid";
+
+export default class Hypocycloid extends Cycloid {
 
     /* 
         * Quando o usuário quer que a circunferência com raio r < R role 

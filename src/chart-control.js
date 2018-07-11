@@ -1,4 +1,8 @@
-class ChartControl {
+import Epicycloid from "./epicycloid";
+import Hypocycloid from "./hypocycloid";
+import BasicMathFunctions from "./basic-math-functions";
+
+export default class ChartControl {
 
   constructor(R, r, minAngle, maxAngle, type, chart) {
     this.R = parseFloat(R);
@@ -66,7 +70,7 @@ class ChartControl {
       this.chart.drawText(this.chart.ctx3, "t = " + this.counter + "°", this.infoPos[0], this.infoPos[1]*0.7);
       setTimeout(() => {
         this.drawCurve();
-      }, 7);
+      }, 14);
     } else {
       this.counter = this.minAngle;
       setTimeout(() => {

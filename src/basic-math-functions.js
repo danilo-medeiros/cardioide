@@ -1,4 +1,4 @@
-class BasicMathFunctions {
+export default class BasicMathFunctions {
 
   constructor() { }
 

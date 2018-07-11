@@ -3,14 +3,20 @@
   "version": "1.0.0",
   "description": "A simple project to generate cardioids charts",
   "main": "index.js",
-  "dependencies": {},
+  "dependencies": {
+    "webpack": "^4.11.0"
+  },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
-    "babel-preset-es2015": "^6.24.1"
+    "babel-preset-es2015": "^6.24.1",
+    "webpack-cli": "^3.0.2"
   },
   "scripts": {
-    "babel": "babel src --out-dir dist"
+    "babel": "babel src --out-dir dist",
+    "build": "webpack --watch --display-error-details"
   },
   "author": "Danilo Medeiros",
   "license": "ISC"

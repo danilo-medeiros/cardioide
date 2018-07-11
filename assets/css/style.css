@@ -7,9 +7,19 @@
     position: relative;
     width: 400px;
     height: 400px;
+    margin: 0px auto;
     -webkit-box-align:center;
     -webkit-box-pack:center;
     display:-webkit-box;
+}
+.cycloid.relative.canvas-container {
+    position: relative;
+    width: 900px;
+    height: 300px;
+    margin: 0px auto;
+}
+.cycloid.relative.canvas-container > canvas {
+    height: 300px;
 }
 canvas {
     width: 100%;
@@ -18,6 +28,8 @@ canvas {
 .relative.canvas-container > canvas {
     position: absolute;
     top: 0;
+    bottom: 0;
+    left: 0;
     right: 0;
 }
 
@@ -25,6 +37,10 @@ canvas {
     font-weight: bold;
     border-radius: 0 !important;
     box-shadow: none;
+}
+
+.form-control-block {
+    width: 100% !important;
 }
 
 .btn {
@@ -42,56 +58,59 @@ canvas {
     width: 100%;
 }
 
-input[type=range] {
-    -webkit-appearance: none;
-    margin: 20px 0px;
-    width: 100%;
-    height: 10px;
-    background: #d3d3d3;
-    outline: none;
-    opacity: 0.7;
-    -webkit-transition: .2s;
-    transition: opacity .2s;
+.form-control-small {
+    width: 100px !important;
 }
 
-input[type=range]:hover {
-    opacity: 1;
+.center {
+    margin-left: auto;
+    margin-right: auto;
 }
 
-input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    border-radius: 50%; 
-    width: 20px;
-    height: 20px;
-    background: #337ab7;
-    cursor: pointer;
+body {
+    overflow-x: hidden;
 }
 
-input[type=range]::-moz-range-thumb {
-    width: 25px;
-    height: 25px;
-    background: #337ab7;
-    cursor: pointer;
+@media(max-width: 1000px) {
+    .cycloid.relative.canvas-container {
+        width: 600px;
+        height: 200px;
+    }
+    .cycloid.relative.canvas-container > canvas {
+        height: 200px;
+    }
 }
 
-input[type=range].red::-webkit-slider-thumb {
-    background: #d9534f;
-}
-
-.slider-range {
-    display: flex;
-    justify-content: space-between;
-    margin: 0px 10px;
-
+@media (max-width: 700px) {
+    .relative.canvas-container {
+        width: 400px;
+        height: 400px;
+    }
+    .cycloid.relative.canvas-container {
+        width: 100%;
+        overflow-y: auto;
+    }
+    .cycloid.relative.canvas-container > canvas {
+        width: 600px;
+        height: 200px;
+    }
 }
 
 @media (max-width: 500px) {
     .relative.canvas-container {
-        width: 300px;
-        height: 300px;
+        width: 400px;
+        height: 400px;
     }
-    body {
-        overflow-x: hidden;
+}
+@media (max-width: 450px) {
+    .relative.canvas-container {
+        width: 350px;
+        height: 350px;
+    }
+}
+@media (max-width: 375px) {
+    .relative.canvas-container {
+        width: 250px;
+        height: 250px;
     }
 }

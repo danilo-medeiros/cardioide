@@ -1,4 +1,6 @@
-class Epicycloid extends Cycloid {
+import Cycloid from "./cycloid";
+
+export default class Epicycloid extends Cycloid {
     /* 
         * Quando o usuário quer que a circunferência com raio r <= R role 
         * pela parte externa da circunferência com raio R

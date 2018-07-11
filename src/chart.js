@@ -1,4 +1,6 @@
-class Chart {
+import BasicMathFunctions from "./basic-math-functions";
+
+export default class Chart {
 
   constructor(canvas1, canvas2, canvas3) {
     // Circunferência do centro e linhas do gráfico
