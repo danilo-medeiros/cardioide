@@ -1,8 +1,8 @@
 import Epicycloid from "./epicycloid";
 import Hypocycloid from "./hypocycloid";
-import BasicMathFunctions from "./basic-math-functions";
+import BasicMathFunctions from "./../basic-math-functions";
 
-export default class ChartControl {
+export default class CyclicChartControl {
 
   constructor(R, r, minAngle, maxAngle, type, chart) {
     this.R = parseFloat(R);
@@ -20,7 +20,7 @@ export default class ChartControl {
 
     
     if (this.type === "hypo") {
-      this.chart.resetScale(300 / R);  
+      this.chart.resetScale(200 / R);  
     } else {
       this.chart.resetScale(180 / (this.R + this.r));
     }

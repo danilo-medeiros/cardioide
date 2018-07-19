@@ -1,9 +1,17 @@
-import BasicMathFunctions from "./basic-math-functions";
-import ChartControl from "./chart-control";
+import BasicMathFunctions from "./../basic-math-functions";
+import CyclicChartControl from "./cyclic-chart-control";
 
-export default class FormControl {
+export default class CyclicFormControl {
 
-  constructor(radius1Input, radius2Input, minAngleInput, maxAngleInput, typeInput, chart) {
+  constructor(
+    radius1Input, 
+    radius2Input, 
+    minAngleInput, 
+    maxAngleInput, 
+    typeInput, 
+    chart, 
+    form, 
+    continueButton, stopButton) {
 
     this.radius1Input = radius1Input;
     this.radius2Input = radius2Input;
@@ -12,15 +20,37 @@ export default class FormControl {
     this.typeInput = typeInput;
     this.basicMathFunctions = new BasicMathFunctions();
     this.chart = chart;
-    this.chartControl = new ChartControl(this.radius1Input.value, this.radius2Input.value, this.getAngle(this.minAngleInput.value), this.getAngle(this.maxAngleInput.value), this.typeInput.value, chart);
-    
-    this.update();
+    this.form = form;
+    this.continueButton = continueButton;
+    this.stopButton = stopButton;
 
-    this.radius1Input.addEventListener("input", event => this.validation());
-    this.radius2Input.addEventListener("input", event => this.validation())
-    this.typeInput.addEventListener("input", event => this.validation());
-    this.maxAngleInput.addEventListener("keyup", event => this.validation());
-    this.minAngleInput.addEventListener("keyup", event => this.validation());
+    this.chartControl = new CyclicChartControl(this.radius1Input.value, this.radius2Input.value, this.getAngle(this.minAngleInput.value), this.getAngle(this.maxAngleInput.value), this.typeInput.value, chart);
+    
+    this.radius1Input.addEventListener("input", () => this.validation());
+    this.radius2Input.addEventListener("input", () => this.validation())
+    this.typeInput.addEventListener("input", () => this.validation());
+    this.maxAngleInput.addEventListener("keyup", () => this.validation());
+    this.minAngleInput.addEventListener("keyup", () => this.validation());
+
+    this.form.addEventListener("submit", (event) => {
+      event.preventDefault();
+      this.update();
+      this.continueButton.classList.add("hidden");
+      this.stopButton.classList.remove("hidden");
+    });
+
+    this.stopButton.addEventListener("click", () => {
+      this.stop();
+      this.continueButton.classList.remove("hidden");
+      this.stopButton.classList.add("hidden");
+    });
+    
+    this.continueButton.addEventListener("click", () => {
+      this.continue();
+      this.continueButton.classList.add("hidden");
+      this.stopButton.classList.remove("hidden");
+    });
+
   }
 
   getAngle(angle) {
@@ -35,11 +65,11 @@ export default class FormControl {
     this.radius2Input.setCustomValidity("");
     this.minAngleInput.setCustomValidity("");
     this.maxAngleInput.setCustomValidity("");
-    if (parseFloat(this.radius1Input.value) <= parseFloat(radius2Input.value) && this.typeInput.value === "hypo") {
+    if (parseFloat(this.radius1Input.value) <= parseFloat(this.radius2Input.value) && this.typeInput.value === "hypo") {
       this.radius2Input.setCustomValidity("Raio inválido. Lembre que R > r");
       return false;
     }
-    if (parseFloat(this.radius1Input.value) < radius2Input.value && parseFloat(this.typeInput.value) === "epi") {
+    if (parseFloat(this.radius1Input.value) < this.radius2Input.value && parseFloat(this.typeInput.value) === "epi") {
       this.radius2Input.setCustomValidity("Raio inválido. Lembre que R >= r");
       return false;
     }
@@ -75,7 +105,7 @@ export default class FormControl {
   update() {
     this.checkSpecialCase();
     this.chartControl.stop = true;
-    this.chartControl = new ChartControl(this.radius1Input.value, this.radius2Input.value, this.getAngle(this.minAngleInput.value), this.getAngle(this.maxAngleInput.value), this.typeInput.value, this.chart);
+    this.chartControl = new CyclicChartControl(this.radius1Input.value, this.radius2Input.value, this.getAngle(this.minAngleInput.value), this.getAngle(this.maxAngleInput.value), this.typeInput.value, this.chart);
   }
 
   stop() {

@@ -1,4 +1,4 @@
-import Cycloid from "./cycloid";
+import Cycloid from "./cyclic-cycloid";
 
 export default class Epicycloid extends Cycloid {
     /* 

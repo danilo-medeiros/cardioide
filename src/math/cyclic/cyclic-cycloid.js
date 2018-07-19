@@ -1,6 +1,6 @@
-import BasicMathFunctions from "./basic-math-functions";
+import BasicMathFunctions from "./../basic-math-functions";
 
-export default class Cycloid {
+export default class CyclicCycloid {
     
     constructor(R, r) {
         this.basicMathFunctions = new BasicMathFunctions();

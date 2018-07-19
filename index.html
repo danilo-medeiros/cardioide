@@ -22,7 +22,7 @@
         <h5 class="text-center">
           <b>Hipociclóides</b>
         </h5>
-        <p class="recuo">Uma hipociclóide é uma curva descrita por um ponto \(P\) localizada na borda de um disco de raio \(r\), tal que o
+        <p class="recuo">Uma <a href="https://pt.wikipedia.org/wiki/Hipocicloide" target="_blank">hipociclóide</a> é uma curva descrita por um ponto \(P\) localizada na borda de um disco de raio \(r\), tal que o
           disco realiza unicamente rolamento (com velocidade angular constante) na parte
           <b>interna</b> de uma superfície circular de raio \(R\).
         </p>
@@ -40,7 +40,7 @@
         <h5 class="text-center">
           <b>Epiciclóides</b>
         </h5>
-        <p class="recuo">Uma epiciclóide é uma curva descrita por um ponto \(P\) localizada na borda de um disco de raio \(r\), tal que o
+        <p class="recuo">Uma <a href="https://pt.wikipedia.org/wiki/Epicicloide" target="_blank">epiciclóide</a> é uma curva descrita por um ponto \(P\) localizada na borda de um disco de raio \(r\), tal que o
           disco realiza unicamente rolamento (com velocidade angular constante) na parte
           <b>externa</b> de uma superfície circular de raio \(R\).
         </p>
@@ -56,41 +56,40 @@
       <div class="col-md-12 col-xs-12 col-lg-12 col-sm-12 text-center" style="margin-top: 30px">
         <div class="row">
           <div class="col-md-6 col-sm-5 col-lg-6 col-xs-12">
-            <form class="form" id="mainForm" autocomplete="off">
+            <form class="form" id="formCyc" autocomplete="off">
               <div class="form-group">
-                <label for="type">Tipo da curva: </label>
-                <select name="type" id="type" class="form-control">
+                <label for="typeCyc">Tipo da curva: </label>
+                <select name="typeCyc" id="typeCyc" class="form-control">
                   <option value="hypo">Hipociclóide</option>
                   <option value="epi">Epiciclóide</option>
-                  <option value="cyc">Ciclóide</option>
                 </select>
               </div>
               <div class="form-group">
-                <label for="radius1">\(R\) (Circunferência azul): </label>
-                <input type="number" step="0.01" id="radius1" value="3" class="form-control center">
+                <label for="r1Cyc">\(R\) (Circunferência azul): </label>
+                <input type="number" step="0.01" id="r1Cyc" value="3" class="form-control center">
               </div>
               <div class="form-group">
-                <label for="radius2">\(r\) (Circunferência preta): </label>
-                <input type="number" step="0.01" id="radius2" value="1" class="form-control center">
+                <label for="r2Cyc">\(r\) (Circunferência preta): </label>
+                <input type="number" step="0.01" id="r2Cyc" value="1" class="form-control center">
               </div>
               <div class="form-group form-inline">
                 <label for="">\(t\) (Ângulo em π radianos):</label>
                 <div class="row">
                   <div class="text-center col-md-6 col-xs-6 col-lg-6 col-sm-6">
                     <label for="minAngle">De</label>
-                    <input type="number" step="0.01" class="form-control form-control-block" id="minAngle" value="0">
+                    <input type="number" step="0.01" class="form-control form-control-block" id="minAngleCyc" value="0">
                   </div>
                   <div class="text-center col-md-6 col-xs-6 col-lg-6 col-sm-6">
                     <label for="maxAngle">Até</label>
-                    <input type="number" step="0.01" class="form-control form-control-block" id="maxAngle" value="2">
+                    <input type="number" step="0.01" class="form-control form-control-block" id="maxAngleCyc" value="2">
                   </div>
                 </div>
 
               </div>
               <div class="form-group">
                 <button class="btn btn-primary" type="submit">Desenhar curva</button>
-                <button class="btn btn-danger" id="stop" type="button">Parar animação</button>
-                <button class="btn btn-success hidden" id="continue" type="button">Continuar animação</button>
+                <button class="btn btn-danger" id="stopCyc" type="button">Parar animação</button>
+                <button class="btn btn-success hidden" id="continueCyc" type="button">Continuar animação</button>
               </div>
             </form>
             <div class='alert alert-info special-case hidden' id="cardioid-message">
@@ -105,9 +104,9 @@
           </div>
           <div class='col-md-6 col-sm-7 col-lg-6 col-xs-12'>
             <div id='simpleCanvasContainer' class='relative canvas-container'>
-              <canvas id='canvas1' style='z-index: 1'></canvas>
-              <canvas id='canvas2' style='z-index: 2'></canvas>
-              <canvas id='canvas3' style='z-index: 3'></canvas>
+              <canvas id='c1' width="600" height="600" style='z-index: 1'></canvas>
+              <canvas id='c2' width="600" height="600" style='z-index: 2'></canvas>
+              <canvas id='c3' width="600" height="600" style='z-index: 3'></canvas>
             </div>
           </div>
         </div>
@@ -116,7 +115,7 @@
         <h5 class="text-center">
           <b>Ciclóides</b>
         </h5>
-        <p class="recuo">Uma ciclóide é uma curva descrita por um ponto \(P\) localizado na borda de um disco de raio \(r\), tal que o disco
+        <p class="recuo">Uma <a href="https://pt.wikipedia.org/wiki/Cicloide" target="_blank">ciclóide</a> é uma curva descrita por um ponto \(P\) localizado na borda de um disco de raio \(r\), tal que o disco
           realiza um rolamento (com velocidade angular constante) sem deslizar, ao longo de uma
           <b>reta</b>.
         </p>
@@ -131,14 +130,14 @@
       <div class="col-md-12 col-xs-12 col-sm-12 col-lg-12">
         <div class="row">
           <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
-            <form class="form" id="cycloidForm" autocomplete="off">
+            <form class="form" id="formStr" autocomplete="off">
               <div class="row">
                 <div class="col-md-4 col-xs-12 col-lg-4 col-sm-12">
                   <div class="form-group text-center">
-                    <label for="radius3">\(r\)</label>
+                    <label for="rStr">\(r\)</label>
                     <br>
                     <label for="">(Raio da circunferência):</label>
-                    <input type="number" step="0.01" id="radius3" value="1" class="form-control form-control-block">
+                    <input type="number" step="0.01" id="rStr" value="2" class="form-control form-control-block">
                   </div>
                 </div>
                 <div class="col-md-8 col-xs-12 col-lg-8 col-sm-12">
@@ -147,11 +146,11 @@
                     <div class="row">
                       <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 form-inline">
                         <label for="">De:</label>
-                        <input type="number" class="form-control form-control-block" id="minAngleCycloid" value="0">
+                        <input type="number" class="form-control form-control-block" id="minAngleStr" step="0.01" value="0">
                       </div>
                       <div class="col-md-6 col-xs-6 col-lg-6 col-sm-6 form-inline">
                         <label for="">até</label>
-                        <input type="number" class="form-control form-control-block" id="maxAngleCycloid" value="2">
+                        <input type="number" class="form-control form-control-block" id="maxAngleStr" step="0.01" value="4">
                       </div>
                     </div>
                   </div>
@@ -160,16 +159,16 @@
               
               <div class="form-group text-center">
                 <button class="btn btn-primary" type="submit">Desenhar curva</button>
-                <button class="btn btn-danger" id="stopCycloid" type="button">Parar animação</button>
-                <button class="btn btn-success hidden" id="continueCycloid" type="button">Continuar animação</button>
+                <button class="btn btn-danger" id="stopStr" type="button">Parar animação</button>
+                <button class="btn btn-success hidden" id="continueStr" type="button">Continuar animação</button>
               </div>
             </form>
           </div>
           <div class='col-md-12 col-sm-12 col-lg-12 col-xs-12'>
             <div id='cycloidCanvasContainer' class='cycloid relative canvas-container'>
-              <canvas id='canvas4' style='z-index: 1'></canvas>
-              <canvas id='canvas5' style='z-index: 2'></canvas>
-              <canvas id='canvas6' style='z-index: 3'></canvas>
+              <canvas id='c4' style='z-index: 1'></canvas>
+              <canvas id='c5' style='z-index: 2'></canvas>
+              <canvas id='c6' style='z-index: 3'></canvas>
             </div>
           </div>
         </div>
