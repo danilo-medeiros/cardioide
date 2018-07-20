@@ -20,6 +20,8 @@ export default class StraightChartControl {
 
         const rangeX = [this.cycloid.get(this.minAngle)[0], this.cycloid.get(this.maxAngle)[0]];
         this.chart.scale = 100 / this.r;
+        this.chart.unityX = Math.PI;
+        this.chart.getXLabel = (value) => { return (Math.round(value / Math.PI)).toString() + " π" };
 
         const diffX = rangeX[1] - rangeX[0];
 

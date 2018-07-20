@@ -22,11 +22,14 @@ export default class Chart {
     this.basicMathFunctions = new BasicMathFunctions();
 
     this.scale = 100;
+    this.unityX = 1;
+    this.unityY = 1;
+
+    this.getXLabel = (value) => { return value.toFixed(2) };
+
     this.configure();
     this.drawChart();
 
-    this.unityX = 1;
-    this.unityY = 1;
   }
 
   configure() {
@@ -86,53 +89,39 @@ export default class Chart {
   }
 
   drawChart(origin = this.center) {
-    
-    const spaceX = [ (origin[0] - this.canvas1.width / 2) / this.scale, (origin[0] + this.canvas1.width / 2) / this.scale ];
-    const spaceY = [ (origin[1] - this.canvas1.height / 2) / this.scale, (origin[1] + this.canvas1.height / 2) / this.scale ]
 
+    const startX = -1 * Math.ceil((origin[0] / this.scale) / this.unityX) * this.unityX;
+    
+    const startY = -1 * Math.ceil((this.canvas1.height - origin[1]) / this.scale / this.unityY) * this.unityY;
+    
+    const spaceX = [ startX, ((this.canvas1.width) - origin[0]) / this.scale ];
+    
+    const spaceY = [ startY, origin[1] / this.scale ]
+    
     this.ctx1.lineWidth = 2 / this.scale;
     
-    for (let i = 0; i < this.width / 2; i = i + this.unityX) {
+    for (let i = spaceY[0]; i < spaceY[1]; i = i + this.unityY) {
       
-      const color = i === this.center[0] ? "#000" : "#CCC";
-      // Linhas verticais
-      this.drawLine(this.ctx1, i * -1, spaceY[0], i * -1, spaceY[1], color);
-      this.drawLine(this.ctx1, i, spaceY[0], i, spaceY[1], color);
-
-      this.drawLine(this.ctx1, i, -0.1, i, 0.1, "#000");
-      this.drawLine(this.ctx1, i * -1, -0.1, i * -1, 0.1, "#000");
-
-    }
-
-    for (let i = 0; i < (this.canvas1.height / this.scale) / 2; i = i + this.unityY) {
-
-      const color = i === this.center[0] ? "#000" : "#CCC";
+      const color = i === 0 ? "#000" : "#CCC";
       // Linhas horizontais
-      this.drawLine(this.ctx1, spaceX[0], i * -1, spaceX[1], i * -1, color);
       this.drawLine(this.ctx1, spaceX[0], i, spaceX[1], i, color);
-
       this.drawLine(this.ctx1, -0.1, i, 0.1, i, "#000");
-      this.drawLine(this.ctx1, -0.1, i * -1, 0.1, i * -1, "#000");
-
     }
 
-    /* for (let i = 0; i < this.width; i++) {
-
-      let color = i === 0 ? "#000" : "#CCC";
+    for (let i = spaceX[0]; i < spaceX[1]; i = i + this.unityX) {
+      
+      const color = i === 0 ? "#000" : "#CCC";
       // Linhas verticais
-      this.drawLine(this.ctx1, i * -1, this.width * -1, i * -1, this.width, color);
-      this.drawLine(this.ctx1, i, this.width * -1, i, this.width, color);
-
+      this.drawLine(this.ctx1, i, spaceY[0], i, spaceY[1], color);
       this.drawLine(this.ctx1, i, -0.1, i, 0.1, "#000");
-      this.drawLine(this.ctx1, i * -1, -0.1, i * -1, 0.1, "#000");
 
-      // Linhas horizontais
-      this.drawLine(this.ctx1, this.width * -1, i * -1, this.width, i * -1, color);
-      this.drawLine(this.ctx1, this.width * -1, i, this.width, i, color);
+      if (this.unityX !== 1) {
+        this.drawText(this.ctx1, this.getXLabel(i), i, -1, 1)
+      }
+    }
 
-      this.drawLine(this.ctx1, -0.1, i, 0.1, i, "#000");
-      this.drawLine(this.ctx1, -0.1, i * -1, 0.1, i * -1, "#000");
-    } */
+    
+
     this.ctx1.lineWidth = 4 / this.scale;
     
   }
