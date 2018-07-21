@@ -17,6 +17,7 @@
     width: 100%;
     height: 300px;
     margin: 0px auto;
+    overflow-y: auto;
 }
 .cycloid.relative.canvas-container > canvas {
     height: 300px;
@@ -71,46 +72,33 @@ body {
     overflow-x: hidden;
 }
 
-@media(max-width: 1000px) {
-    .cycloid.relative.canvas-container {
-        width: 600px;
-        height: 200px;
+@media (max-width: 800px) {
+    
+    .scroll-div {
+        overflow-x: auto;
     }
-    .cycloid.relative.canvas-container > canvas {
-        height: 200px;
-    }
-}
 
-@media (max-width: 700px) {
-    .relative.canvas-container {
-        width: 400px;
-        height: 400px;
-    }
     .cycloid.relative.canvas-container {
-        width: 100%;
-        overflow-y: auto;
+        width: 800px    
     }
     .cycloid.relative.canvas-container > canvas {
-        width: 600px;
-        height: 200px;
+        height: 300px;
     }
 }
 
 @media (max-width: 500px) {
     .relative.canvas-container {
-        width: 400px;
-        height: 400px;
+        width: 100%;
     }
 }
 @media (max-width: 450px) {
     .relative.canvas-container {
-        width: 350px;
-        height: 350px;
+        width: 100%;
     }
 }
 @media (max-width: 375px) {
     .relative.canvas-container {
-        width: 250px;
-        height: 250px;
+        width: 100%;
+        
     }
 }

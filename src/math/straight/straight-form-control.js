@@ -4,9 +4,10 @@ import StraightChartControl from "./straight-chart-control";
 export default class StraightFormControl {
 
     constructor(
-        radiusInput, minAngleInput, maxAngleInput, chart, form, stopButton, continueButton) {
+        radiusInput, wInput, minAngleInput, maxAngleInput, chart, form, stopButton, continueButton) {
 
         this.radiusInput = radiusInput;
+        this.wInput = wInput;
         this.minAngleInput = minAngleInput;
         this.maxAngleInput = maxAngleInput;
         this.chart = chart;
@@ -15,7 +16,10 @@ export default class StraightFormControl {
         this.continueButton = continueButton;
         this.basicMathFunctions = new BasicMathFunctions();
 
-        this.chartControl = new StraightChartControl(this.radiusInput.value, this.getAngle(this.minAngleInput.value), this.getAngle(this.maxAngleInput.value), chart);
+        this.chartControl = new StraightChartControl(
+            this.radiusInput.value, this.wInput.value,
+            this.getAngle(this.minAngleInput.value), 
+            this.getAngle(this.maxAngleInput.value), chart);
 
         this.maxAngleInput.addEventListener("keyup", () => this.validation());
         this.minAngleInput.addEventListener("keyup", () => this.validation());
@@ -71,7 +75,10 @@ export default class StraightFormControl {
     // Atualiza tudo com os valores informados
     update() {
         this.chartControl.stop = true;
-        this.chartControl = new StraightChartControl(this.radiusInput.value, this.getAngle(this.minAngleInput.value), this.getAngle(this.maxAngleInput.value), this.chart);
+        this.chartControl = new StraightChartControl(
+            this.radiusInput.value, this.wInput.value, 
+            this.getAngle(this.minAngleInput.value), 
+            this.getAngle(this.maxAngleInput.value), this.chart);
     }
 
     isStopped() {

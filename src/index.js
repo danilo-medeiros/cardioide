@@ -16,6 +16,7 @@ const cyclicFormControl = new CyclicFormControl(
 
 const straightFormControl = new StraightFormControl(
 	document.getElementById("rStr"), 
+	document.getElementById("wStr"), 
 	document.getElementById("minAngleStr"), 
 	document.getElementById("maxAngleStr"), 
 	new Chart(document.getElementById("cycloidCanvasContainer")),

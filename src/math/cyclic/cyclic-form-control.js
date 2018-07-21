@@ -11,7 +11,7 @@ export default class CyclicFormControl {
     typeInput, 
     chart, 
     form, 
-    continueButton, stopButton) {
+    stopButton, continueButton) {
 
     this.radius1Input = radius1Input;
     this.radius2Input = radius2Input;
@@ -25,6 +25,7 @@ export default class CyclicFormControl {
     this.stopButton = stopButton;
 
     this.chartControl = new CyclicChartControl(this.radius1Input.value, this.radius2Input.value, this.getAngle(this.minAngleInput.value), this.getAngle(this.maxAngleInput.value), this.typeInput.value, chart);
+    this.checkSpecialCase();
     
     this.radius1Input.addEventListener("input", () => this.validation());
     this.radius2Input.addEventListener("input", () => this.validation())

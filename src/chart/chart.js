@@ -96,16 +96,20 @@ export default class Chart {
     
     const spaceX = [ startX, ((this.canvas1.width) - origin[0]) / this.scale ];
     
-    const spaceY = [ startY, origin[1] / this.scale ]
+    const spaceY = [ startY, origin[1] / this.scale ];
     
     this.ctx1.lineWidth = 2 / this.scale;
+
+    let canDrawText = true;
     
+    this.ctx1.textAlign = this.ctx2.textAlign = this.ctx3.textAlign = "center";
+
     for (let i = spaceY[0]; i < spaceY[1]; i = i + this.unityY) {
       
       const color = i === 0 ? "#000" : "#CCC";
       // Linhas horizontais
       this.drawLine(this.ctx1, spaceX[0], i, spaceX[1], i, color);
-      this.drawLine(this.ctx1, -0.1, i, 0.1, i, "#000");
+      this.drawLine(this.ctx1, -5 / this.scale, i, 5 / this.scale, i, "#000");
     }
 
     for (let i = spaceX[0]; i < spaceX[1]; i = i + this.unityX) {
@@ -113,14 +117,30 @@ export default class Chart {
       const color = i === 0 ? "#000" : "#CCC";
       // Linhas verticais
       this.drawLine(this.ctx1, i, spaceY[0], i, spaceY[1], color);
-      this.drawLine(this.ctx1, i, -0.1, i, 0.1, "#000");
+      this.drawLine(this.ctx1, i, -5 / this.scale, i, 5 / this.scale, "#000");
 
-      if (this.unityX !== 1) {
-        this.drawText(this.ctx1, this.getXLabel(i), i, -1, 1)
+      if (this.unityX !== 1 && this.scale > 15) {
+
+        if ((this.scale <= 20 && canDrawText) || this.scale > 20) {
+          this.drawText(this.ctx1, this.getXLabel(i), i, -30 / this.scale, 1)
+          canDrawText = !canDrawText || this.scale > 20;
+        }
+/* 
+        if (this.scale <= 20) {
+          if (canDrawText) {
+            canDrawText = false;
+            this.drawText(this.ctx1, this.getXLabel(i), i - this.unityX * 0.2, -1.2, 1)
+          } else {
+            canDrawText = true;
+          }
+        } else {
+          this.drawText(this.ctx1, this.getXLabel(i), i - this.unityX * 0.2, -1.2, 1)
+        } */
+        
       }
     }
 
-    
+    this.ctx1.textAlign = this.ctx2.textAlign = this.ctx3.textAlign = "left";
 
     this.ctx1.lineWidth = 4 / this.scale;
     
