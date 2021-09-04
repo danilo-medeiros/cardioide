@@ -66,9 +66,11 @@ export default class StraightChartControl {
             [originX, originY] = this.cycloid.get(this.counter);
             [futureX, futureY] = this.cycloid.get(this.counter + this.delta);
 
+            const angle = this.counter + 0.01;
+
             this.chart.drawLine(this.chart.ctx2, originX, originY, futureX, futureY, "#d9534f");
             this.drawMovingCircle([futureX, futureY], [(this.counter + this.delta) * this.r * this.w, this.r]);
-            this.chart.drawText(this.chart.ctx3, "t = " + ((originX / Math.PI).toFixed(2)).toString() + "π", this.infoPos[0], this.infoPos[1] * 0.8);
+            this.chart.drawText(this.chart.ctx3, "t = " + ((angle / Math.PI).toFixed(2)).toString() + "π", this.infoPos[0], this.infoPos[1] * 0.8);
             this.counter += this.delta;
             setTimeout(() => {
                 this.drawCurve();
